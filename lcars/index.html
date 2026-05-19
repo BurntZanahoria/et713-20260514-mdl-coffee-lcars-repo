@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cafe Inventory — LCARS 2380</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --orange:#FF9900;--tan:#FFCC88;--blue:#6699FF;--ltblue:#99CCFF;
+  --purple:#9988DD;--teal:#66CCCC;--pink:#FF7766;--yellow:#FFEE66;
+  --bg:#0A0A0F;--card-bg:#111118;--sidebar:#0D0D14;
+  --text:#FFFFFF;--muted:#888899;
+}
+html,body{background:var(--bg);color:var(--text);font-family:'Orbitron',monospace;min-height:100vh;overflow-x:hidden;}
+.app{display:flex;flex-direction:column;min-height:100vh;}
+
+/* TOP BAR */
+.top-bar{background:var(--orange);height:90px;display:flex;align-items:flex-end;flex-shrink:0;}
+.top-bar-left{width:180px;height:100%;background:var(--orange);flex-shrink:0;display:flex;align-items:flex-end;padding-bottom:12px;padding-left:16px;}
+.corner-inner{width:140px;height:48px;background:var(--bg);border-radius:48px 0 0 0;}
+.top-bar-content{flex:1;display:flex;align-items:center;justify-content:space-between;padding:0 24px 10px;}
+.top-bar-title h1{font-size:26px;font-weight:900;color:#000;letter-spacing:4px;}
+.top-bar-title p{font-size:10px;font-weight:600;color:#000;letter-spacing:3px;opacity:.65;}
+.top-bar-badges{display:flex;gap:8px;}
+.tbadge{background:#000;color:var(--orange);font-size:10px;font-weight:700;padding:5px 14px;border-radius:20px;letter-spacing:2px;}
+.tbadge.blue{color:var(--ltblue);}
+.tbadge.purple{color:var(--purple);}
+.top-bar-right{width:40px;height:100%;background:var(--blue);border-radius:0 0 30px 0;flex-shrink:0;}
+
+/* BODY */
+.body-wrap{display:flex;flex:1;}
+
+/* SIDEBAR */
+.sidebar{width:180px;background:var(--sidebar);display:flex;flex-direction:column;gap:4px;padding:12px 0;flex-shrink:0;}
+.nav-btn{background:var(--tan);color:#000;font-family:'Orbitron',monospace;font-size:12px;font-weight:700;padding:14px 20px;border:none;cursor:pointer;text-align:left;letter-spacing:2px;border-radius:0 24px 24px 0;margin-right:16px;transition:all .15s;}
+.nav-btn:hover{opacity:.85;}
+.nav-btn.active{background:var(--orange);}
+.nav-btn.nb{background:var(--blue);}
+.nav-btn.np{background:var(--purple);}
+.nav-btn.nt{background:var(--ltblue);}
+.sidebar-spacer{flex:1;}
+.sidebar-bars{display:flex;flex-direction:column;gap:4px;padding:0 16px 16px 0;}
+.sbar{height:10px;border-radius:0 8px 8px 0;}
+.sbar.s1{background:var(--purple);width:100%;}
+.sbar.s2{background:var(--orange);width:75%;}
+.sbar.s3{background:var(--ltblue);width:55%;}
+
+/* MAIN */
+.main{flex:1;padding:20px 24px;min-width:0;display:flex;flex-direction:column;}
+
+/* SECTION HEADER */
+.section-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.section-title{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:3px;}
+.section-line{flex:1;height:1px;background:#222;}
+.section-dot{width:32px;height:8px;background:var(--tan);border-radius:4px;}
+
+/* STATS GRID */
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-bottom:20px;}
+.stat-panel{background:var(--card-bg);padding:18px 20px;}
+.stat-label{font-size:9px;font-weight:600;color:var(--muted);letter-spacing:3px;margin-bottom:6px;}
+.stat-val{font-size:32px;font-weight:900;color:var(--text);line-height:1;}
+.stat-val .unit{font-size:14px;font-weight:400;color:var(--muted);margin-left:4px;}
+
+/* SEARCH */
+.search-wrap{display:flex;margin-bottom:16px;}
+.search-label{background:var(--orange);color:#000;font-size:11px;font-weight:700;padding:10px 16px;letter-spacing:2px;display:flex;align-items:center;border-radius:20px 0 0 20px;}
+.search-input{flex:1;background:#1a1a24;border:none;color:var(--text);font-family:'Orbitron',monospace;font-size:12px;padding:10px 16px;letter-spacing:1px;outline:none;border-radius:0 20px 20px 0;}
+.search-input::placeholder{color:#333344;}
+
+/* FILTER PILLS */
+.filters{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
+.fpill{background:transparent;font-family:'Orbitron',monospace;font-size:10px;font-weight:700;padding:7px 18px;cursor:pointer;letter-spacing:2px;border-radius:20px;transition:all .2s;border:1.5px solid;}
+.fpill.all{border-color:#555;color:#aaa;}
+.fpill.all.active{background:var(--orange);color:#000;border-color:var(--orange);}
+.fpill.arabica{border-color:var(--tan);color:var(--tan);}
+.fpill.arabica.active{background:var(--tan);color:#000;}
+.fpill.robusta{border-color:var(--orange);color:var(--orange);}
+.fpill.robusta.active{background:var(--orange);color:#000;}
+.fpill.liberica{border-color:var(--purple);color:var(--purple);}
+.fpill.liberica.active{background:var(--purple);color:#000;}
+.fpill.excelsa{border-color:var(--ltblue);color:var(--ltblue);}
+.fpill.excelsa.active{background:var(--ltblue);color:#000;}
+
+/* BEAN CARDS */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:3px;}
+.bean-card{background:var(--card-bg);padding:18px 20px;cursor:pointer;transition:background .15s;border-left:3px solid transparent;}
+.bean-card.arabica{border-left-color:var(--tan);}
+.bean-card.robusta{border-left-color:var(--orange);}
+.bean-card.liberica{border-left-color:var(--purple);}
+.bean-card.excelsa{border-left-color:var(--ltblue);}
+.bean-card:hover{background:#181820;}
+.bean-card.sel{background:#14141e;}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;}
+.card-reg{font-size:9px;color:var(--muted);letter-spacing:2px;}
+.type-pill{font-size:9px;font-weight:700;padding:4px 14px;border-radius:12px;letter-spacing:1px;}
+.tp-arabica{background:#3a2800;color:var(--tan);}
+.tp-robusta{background:#3a1800;color:var(--orange);}
+.tp-liberica{background:#1a0033;color:var(--purple);}
+.tp-excelsa{background:#001a33;color:var(--ltblue);}
+.card-name{font-size:18px;font-weight:900;letter-spacing:2px;margin-bottom:8px;}
+.card-desc{font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:10px;border-bottom:1px dotted #222230;padding-bottom:10px;}
+.card-bottom{display:flex;justify-content:space-between;align-items:center;}
+.cr-label{font-size:11px;color:var(--muted);}
+.card-price{font-size:24px;font-weight:900;color:var(--orange);}
+.card-supplier{font-size:9px;color:#444455;letter-spacing:1px;margin-top:4px;}
+.card-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px;}
+.qty-num{font-size:11px;color:var(--muted);letter-spacing:1px;}
+.qty-bar-wrap{width:100px;height:4px;background:#222;border-radius:2px;overflow:hidden;}
+.qty-fill{height:100%;border-radius:2px;}
+
+/* DETAIL */
+.detail{display:none;background:#0e0e18;border:1px solid var(--orange);padding:24px;margin-top:3px;}
+.detail.show{display:block;}
+.detail-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;}
+.dreg{font-size:9px;color:var(--blue);letter-spacing:3px;margin-bottom:6px;}
+.dname{font-size:26px;font-weight:900;letter-spacing:3px;margin-bottom:4px;}
+.dtype{font-size:11px;letter-spacing:2px;}
+.close-btn{background:var(--pink);color:#000;border:none;font-family:'Orbitron',monospace;font-size:10px;font-weight:700;padding:8px 18px;border-radius:4px;cursor:pointer;letter-spacing:2px;}
+.detail-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;margin-bottom:16px;}
+.ds{background:var(--card-bg);padding:14px 16px;}
+.ds label{font-size:9px;color:var(--muted);letter-spacing:2px;display:block;margin-bottom:6px;}
+.ds .dv{font-size:20px;font-weight:900;color:var(--orange);}
+.ds .dv.sm{font-size:14px;}
+.detail-desc-box{background:var(--card-bg);padding:16px;margin-bottom:12px;}
+.detail-desc-box label{font-size:9px;color:var(--blue);letter-spacing:2px;display:block;margin-bottom:8px;}
+.detail-desc-box p{font-size:12px;color:#ccc;line-height:1.8;}
+.prime-box{border:1px solid var(--yellow);padding:14px 18px;}
+.prime-box label{font-size:9px;color:var(--yellow);letter-spacing:3px;display:block;margin-bottom:8px;}
+.prime-box p{font-size:11px;color:var(--tan);line-height:1.7;}
+
+/* ANALYSIS */
+.analysis-section{margin-bottom:32px;}
+.analysis-title{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:3px;margin-bottom:16px;padding-left:12px;border-left:3px solid var(--orange);}
+.bar-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.bar-label{font-size:11px;font-weight:700;letter-spacing:2px;width:90px;flex-shrink:0;color:var(--text);}
+.bar-track{flex:1;height:22px;background:#111;border-radius:3px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:3px;transition:width .8s ease;}
+.bar-val{font-size:12px;font-weight:700;width:50px;text-align:right;flex-shrink:0;color:var(--text);}
+
+/* SUPPLIERS */
+.sup-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:3px;}
+.sup-card{background:var(--card-bg);padding:18px 20px;border-left:3px solid var(--orange);}
+.sup-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;}
+.sup-reg{font-size:9px;color:var(--muted);letter-spacing:2px;}
+.sku-pill{background:#1a1a00;color:var(--tan);font-size:9px;font-weight:700;padding:4px 14px;border-radius:12px;letter-spacing:1px;}
+.sup-name{font-size:16px;font-weight:900;letter-spacing:2px;margin-bottom:10px;line-height:1.3;}
+.sup-divider{border-bottom:1px dotted #222230;margin-bottom:10px;}
+.sup-bottom{display:flex;justify-content:space-between;align-items:center;}
+.sup-stk{font-size:12px;color:var(--muted);}
+.sup-stk span{font-size:22px;font-weight:900;color:var(--text);}
+.sup-val{font-size:11px;color:var(--muted);text-align:right;}
+.sup-val span{display:block;font-size:14px;font-weight:700;color:var(--orange);}
+
+/* SYSTEM */
+.sys-section{background:var(--card-bg);border-left:3px solid var(--orange);padding:20px;margin-bottom:3px;}
+.sys-title{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:3px;margin-bottom:16px;}
+.sys-row{display:flex;gap:16px;margin-bottom:8px;font-size:12px;}
+.sys-key{color:var(--muted);letter-spacing:2px;min-width:100px;flex-shrink:0;}
+.sys-val{color:var(--text);letter-spacing:1px;}
+.sys-val.green{color:#66FF99;}
+.sys-val.mono{font-family:monospace;font-size:11px;color:var(--ltblue);}
+.purge-btn{background:var(--pink);color:#000;border:none;font-family:'Orbitron',monospace;font-size:12px;font-weight:700;padding:14px 28px;border-radius:8px;cursor:pointer;letter-spacing:2px;margin-top:20px;}
+.purge-btn:hover{opacity:.85;}
+
+/* STATUS BAR */
+.status-bar{background:#0a0a14;border-top:1px solid #1a1a2a;padding:8px 24px;display:flex;align-items:center;justify-content:flex-end;gap:20px;flex-shrink:0;}
+.status-dot{display:flex;align-items:center;gap:6px;font-size:10px;letter-spacing:2px;color:var(--muted);}
+.dot{width:8px;height:8px;border-radius:50%;}
+.dot.green{background:#66FF99;}
+.dot.blue{background:var(--ltblue);}
+.status-sync{font-size:10px;letter-spacing:2px;color:var(--muted);}
+
+/* BOTTOM BAR */
+.bottom-bar{height:20px;display:flex;gap:3px;flex-shrink:0;}
+.bb{flex:1;background:var(--orange);}
+.bb.tan{background:var(--tan);}
+.bb.blue{background:var(--blue);}
+.bb.purple{background:var(--purple);}
+.bb-corner{width:180px;background:var(--orange);border-radius:0 30px 0 0;flex-shrink:0;}
+
+.loading{text-align:center;padding:60px;font-size:13px;letter-spacing:4px;color:var(--blue);animation:blink 1s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.empty{padding:30px;font-size:11px;letter-spacing:2px;color:#444;}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="top-bar">
+    <div class="top-bar-left"><div class="corner-inner"></div></div>
+    <div class="top-bar-content">
+      <div class="top-bar-badges">
+        <span class="tbadge">SEC 47</span>
+        <span class="tbadge blue">D1-A</span>
+        <span class="tbadge purple">CMD</span>
+      </div>
+      <div class="top-bar-title">
+        <h1>CAFE INVENTORY</h1>
+        <p id="top-subtitle">BEAN MANIFEST // LCARS 2380</p>
+      </div>
+    </div>
+    <div class="top-bar-right"></div>
+  </div>
+
+  <div class="body-wrap">
+    <div class="sidebar">
+      <button class="nav-btn active" onclick="setView('inventory',this)">INVENTORY</button>
+      <button class="nav-btn nb" onclick="setView('analysis',this)">ANALYSIS</button>
+      <button class="nav-btn np" onclick="setView('suppliers',this)">SUPPLIERS</button>
+      <button class="nav-btn nt" onclick="setView('system',this)">SYSTEM</button>
+      <div class="sidebar-spacer"></div>
+      <div class="sidebar-bars">
+        <div class="sbar s1"></div>
+        <div class="sbar s2"></div>
+        <div class="sbar s3"></div>
+      </div>
+    </div>
+
+    <div class="main" id="main-area">
+      <div class="loading">ACCESSING LCARS DATABASE...</div>
+    </div>
+  </div>
+
+  <div class="status-bar">
+    <div class="status-dot"><div class="dot green"></div>ONLINE</div>
+    <div class="status-dot"><div class="dot blue"></div>LCARS 2380</div>
+    <div class="status-sync" id="sync-status">SYNCING...</div>
+  </div>
+
+  <div class="bottom-bar">
+    <div class="bb-corner"></div>
+    <div class="bb tan"></div>
+    <div class="bb blue"></div>
+    <div class="bb purple"></div>
+    <div class="bb"></div>
+  </div>
+</div>
+
+<script>
+let allBeans=[], filtered=[], activeType='ALL', selId=null, searchTerm='', currentView='inventory';
+const tc=t=>t.toLowerCase();
+const typeColor={Arabica:'var(--tan)',Robusta:'var(--orange)',Liberica:'var(--purple)',Excelsa:'var(--ltblue)'};
+const typeColorHex={Arabica:'#FFCC88',Robusta:'#FF9900',Liberica:'#9988DD',Excelsa:'#99CCFF'};
+const primeLore={
+  Arabica:"As per General Order 1, Federation officers must not interfere with the natural cultivation of Arabica civilizations. Their smoothness is their own to discover.",
+  Robusta:"WARNING — Class-R specimen exerts powerful influence. The Prime Directive mandates non-interference with Robusta-dominant ecosystems. Approach with disciplined restraint.",
+  Liberica:"CLASSIFIED under General Order 1: The Liberica bean variety originates from an unexplored sector. Federation law prohibits coercive extraction or contact.",
+  Excelsa:"RARE ENCOUNTER — Excelsa specimens detected in minimal quantities. The Prime Directive prohibits interference with their limited but vibrant existence. Observe only."
+};
+const supplierData={
+  1:{name:'AnyCompany Coffee Suppliers',location:'Any Town, WA'},
+  2:{name:'Central Example Corp. Coffee',location:'Nowhere, CO'},
+  3:{name:'North East AnyCompany Coffee Suppliers',location:'Any Town, NY'},
+  4:{name:'SE Example Corp Coffee Suppliers',location:'None City, GA'},
+  5:{name:'SW Example Corp. Coffee',location:'Anytown, AZ'},
+  6:{name:'Northern Example Corp. Coffee',location:'Not Town, MN'},
+  7:{name:'West Coast Example Corp. Coffee',location:'Any Beach, CA'},
+  8:{name:'Southern AnyCompany Coffee Suppliers',location:'Anytown, TX'}
+};
+let fetchedAt=null;
+
+async function fetchBeans(){
+  try{
+    const r=await fetch('https://nybgcr6l45.execute-api.us-east-1.amazonaws.com/prod/bean_products');
+    allBeans=await r.json();
+    filtered=[...allBeans];
+    fetchedAt=new Date();
+    document.getElementById('sync-status').textContent=`SYNC COMPLETE — ${allBeans.length} RECORDS`;
+    setView(currentView, document.querySelector('.nav-btn.active'));
+  }catch(e){
+    document.getElementById('main-area').innerHTML='<div class="empty">COMM ERROR: UNABLE TO REACH FEDERATION DATABASE.</div>';
+    document.getElementById('sync-status').textContent='SYNC FAILED';
+  }
+}
+
+/* ── INVENTORY VIEW ── */
+function renderInventory(){
+  document.getElementById('top-subtitle').textContent='BEAN MANIFEST // LCARS 2380';
+  const maxQty=Math.max(...allBeans.map(b=>b.quantity));
+  const types=[...new Set(allBeans.map(b=>b.type))].length;
+  const totalQty=allBeans.reduce((a,b)=>a+b.quantity,0);
+  const avg=(allBeans.reduce((a,b)=>a+parseFloat(b.price),0)/allBeans.length).toFixed(2);
+  const sups=[...new Set(allBeans.map(b=>b.supplier_id))].length;
+
+  let display=filtered;
+  if(searchTerm){
+    const s=searchTerm.toLowerCase();
+    display=filtered.filter(b=>b.product_name.toLowerCase().includes(s)||b.type.toLowerCase().includes(s)||b.description.toLowerCase().includes(s));
+  }
+
+  const cards=display.map(b=>`
+    <div class="bean-card ${tc(b.type)}${b.id===selId?' sel':''}" onclick="showDetail(${b.id})">
+      <div class="card-top">
+        <div class="card-reg">BN-${String(b.id).padStart(4,'0')} // SUP-${String(b.supplier_id).padStart(2,'0')}</div>
+        <span class="type-pill tp-${tc(b.type)}">${b.type.toUpperCase()}</span>
+      </div>
+      <div class="card-name">${b.product_name.toUpperCase()}</div>
+      <div class="card-desc">${b.description}</div>
+      <div class="card-bottom">
+        <div>
+          <div style="display:flex;align-items:baseline;gap:4px"><span class="cr-label">cr</span><span class="card-price">${parseFloat(b.price).toFixed(2)}</span></div>
+          <div class="card-supplier">// ${supplierData[b.supplier_id]?.name||'Unknown'}</div>
+        </div>
+        <div class="card-right">
+          <div class="qty-num">${b.quantity}u</div>
+          <div class="qty-bar-wrap"><div class="qty-fill" style="width:${Math.round(b.quantity/maxQty*100)}%;background:${typeColor[b.type]}"></div></div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  document.getElementById('main-area').innerHTML=`
+    <div class="section-header">
+      <span class="section-title">STARDATE 2026.139 // BEAN MANIFEST</span>
+      <div class="section-line"></div>
+      <div class="section-dot"></div>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-panel"><div class="stat-label">TOTAL UNITS</div><div class="stat-val">${totalQty.toLocaleString()}<span class="unit">kg</span></div></div>
+      <div class="stat-panel"><div class="stat-label">VARIETIES</div><div class="stat-val">${types}</div></div>
+      <div class="stat-panel"><div class="stat-label">AVG PRICE</div><div class="stat-val">${avg}<span class="unit">cr</span></div></div>
+      <div class="stat-panel"><div class="stat-label">SUPPLIERS</div><div class="stat-val">${sups}</div></div>
+    </div>
+    <div class="search-wrap">
+      <div class="search-label">QRY</div>
+      <input class="search-input" id="search" type="text" placeholder="Scan manifest..." value="${searchTerm}" oninput="searchTerm=this.value;renderInventory()">
+    </div>
+    <div class="filters">
+      <button class="fpill all${activeType==='ALL'?' active':''}" onclick="filterType('ALL',this)">ALL</button>
+      <button class="fpill arabica${activeType==='Arabica'?' active':''}" onclick="filterType('Arabica',this)">ARABICA</button>
+      <button class="fpill robusta${activeType==='Robusta'?' active':''}" onclick="filterType('Robusta',this)">ROBUSTA</button>
+      <button class="fpill liberica${activeType==='Liberica'?' active':''}" onclick="filterType('Liberica',this)">LIBERICA</button>
+      <button class="fpill excelsa${activeType==='Excelsa'?' active':''}" onclick="filterType('Excelsa',this)">EXCELSA</button>
+    </div>
+    <div class="grid">${cards||'<div class="empty">NO SPECIMENS MATCH FILTER</div>'}</div>
+    <div class="detail${selId?' show':''}" id="detail">${selId?buildDetail(selId):''}</div>
+  `;
+}
+
+function buildDetail(id){
+  const b=allBeans.find(x=>x.id===id);
+  if(!b)return'';
+  const col=typeColor[b.type]||'var(--orange)';
+  return`
+    <div class="detail-head">
+      <div>
+        <div class="dreg">REGISTRY BN-${String(b.id).padStart(4,'0')} // ${supplierData[b.supplier_id]?.name||'UNKNOWN'}</div>
+        <div class="dname">${b.product_name.toUpperCase()}</div>
+        <div class="dtype" style="color:${col}">${b.type.toUpperCase()} CLASS // BOTANICAL SPECIMEN</div>
+      </div>
+      <button class="close-btn" onclick="closeDetail()">CLOSE ✕</button>
+    </div>
+    <div class="detail-stats">
+      <div class="ds"><label>UNIT PRICE</label><div class="dv">₡${parseFloat(b.price).toFixed(2)}</div></div>
+      <div class="ds"><label>STOCK</label><div class="dv">${b.quantity.toLocaleString()}</div></div>
+      <div class="ds"><label>CLASS</label><div class="dv sm" style="color:${col}">${b.type}</div></div>
+      <div class="ds"><label>SUPPLIER ID</label><div class="dv sm">SUP-${String(b.supplier_id).padStart(2,'0')}</div></div>
+    </div>
+    <div class="detail-desc-box"><label>SPECIMEN ASSESSMENT LOG</label><p>${b.description}</p></div>
+    <div class="prime-box"><label>⚠ PRIME DIRECTIVE — GENERAL ORDER 1</label><p>${primeLore[b.type]||'Protected under General Order 1.'}</p></div>
+  `;
+}
+
+function showDetail(id){selId=id;renderInventory();setTimeout(()=>{document.getElementById('detail')?.scrollIntoView({behavior:'smooth',block:'nearest'})},50);}
+function closeDetail(){selId=null;renderInventory();}
+function filterType(type,btn){activeType=type;filtered=type==='ALL'?[...allBeans]:allBeans.filter(b=>b.type===type);selId=null;renderInventory();}
+
+/* ── ANALYSIS VIEW ── */
+function renderAnalysis(){
+  document.getElementById('top-subtitle').textContent='TACTICAL ANALYSIS // LCARS 2380';
+  const byType={};
+  allBeans.forEach(b=>{byType[b.type]=(byType[b.type]||0)+b.quantity;});
+  const typeOrder=['Robusta','Liberica','Arabica','Excelsa'];
+  const maxType=Math.max(...Object.values(byType));
+
+  const priceBuckets={'$10-12':0,'$13-15':0,'$16-18':0};
+  allBeans.forEach(b=>{
+    const p=parseFloat(b.price);
+    if(p<=12)priceBuckets['$10-12']++;
+    else if(p<=15)priceBuckets['$13-15']++;
+    else priceBuckets['$16-18']++;
+  });
+  const maxPrice=Math.max(...Object.values(priceBuckets));
+
+  const topStocked=[...allBeans].sort((a,b)=>b.quantity-a.quantity).slice(0,5);
+  const maxTop=topStocked[0].quantity;
+
+  const typeBarColors={Robusta:'#CC6600',Liberica:'#9988DD',Arabica:'#FFCC88',Excelsa:'#66CCCC'};
+
+  document.getElementById('main-area').innerHTML=`
+    <div class="section-header">
+      <span class="section-title">INVENTORY ANALYSIS // TACTICAL</span>
+      <div class="section-line"></div>
+      <div class="section-dot"></div>
+    </div>
+    <div class="analysis-section">
+      <div class="analysis-title">// STOCK BY VARIETY</div>
+      ${typeOrder.map(t=>`
+        <div class="bar-row">
+          <div class="bar-label">${t.toUpperCase()}</div>
+          <div class="bar-track"><div class="bar-fill" style="width:${Math.round((byType[t]||0)/maxType*100)}%;background:${typeBarColors[t]}"></div></div>
+          <div class="bar-val">${(byType[t]||0).toLocaleString()}</div>
+        </div>
+      `).join('')}
+    </div>
+    <div class="analysis-section">
+      <div class="analysis-title">// PRICE DISTRIBUTION</div>
+      ${Object.entries(priceBuckets).map(([k,v])=>`
+        <div class="bar-row">
+          <div class="bar-label">${k}</div>
+          <div class="bar-track"><div class="bar-fill" style="width:${Math.round(v/maxPrice*100)}%;background:var(--ltblue)"></div></div>
+          <div class="bar-val">${v}</div>
+        </div>
+      `).join('')}
+    </div>
+    <div class="analysis-section">
+      <div class="analysis-title">// TOP STOCKED UNITS</div>
+      ${topStocked.map((b,i)=>{
+        const colors=['#FFCC88','#9988DD','#FFCC88','#CC6600','#CC6600'];
+        return`<div class="bar-row">
+          <div class="bar-label" style="font-size:9px">${b.product_name.toUpperCase().substring(0,10)}</div>
+          <div class="bar-track"><div class="bar-fill" style="width:${Math.round(b.quantity/maxTop*100)}%;background:${colors[i]}"></div></div>
+          <div class="bar-val">${b.quantity}</div>
+        </div>`;
+      }).join('')}
+    </div>
+  `;
+}
+
+/* ── SUPPLIERS VIEW ── */
+function renderSuppliers(){
+  document.getElementById('top-subtitle').textContent='TRADE NETWORK // LCARS 2380';
+  const supMap={};
+  allBeans.forEach(b=>{
+    if(!supMap[b.supplier_id])supMap[b.supplier_id]={qty:0,skus:0,value:0};
+    supMap[b.supplier_id].qty+=b.quantity;
+    supMap[b.supplier_id].skus++;
+    supMap[b.supplier_id].value+=b.quantity*parseFloat(b.price);
+  });
+
+  const cards=Object.entries(supplierData).map(([id,s])=>{
+    const d=supMap[id]||{qty:0,skus:0,value:0};
+    return`
+      <div class="sup-card">
+        <div class="sup-top">
+          <div class="sup-reg">SUP-${String(id).padStart(2,'0')} // ${s.location}</div>
+          <span class="sku-pill">${d.skus} SKU</span>
+        </div>
+        <div class="sup-name">${s.name.toUpperCase()}</div>
+        <div class="sup-divider"></div>
+        <div class="sup-bottom">
+          <div class="sup-stk">stk <span>${(d.qty||0).toLocaleString()}</span></div>
+          <div class="sup-val"><span>cr ${(d.value||0).toLocaleString()} value</span></div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('main-area').innerHTML=`
+    <div class="section-header">
+      <span class="section-title">SUPPLIER ROSTER // FEDERATION TRADE</span>
+      <div class="section-line"></div>
+      <div class="section-dot"></div>
+    </div>
+    <div class="sup-grid">${cards}</div>
+  `;
+}
+
+/* ── SYSTEM VIEW ── */
+function renderSystem(){
+  document.getElementById('top-subtitle').textContent='SYSTEM DIAG // LCARS 2380';
+  const updated=fetchedAt?fetchedAt.toLocaleString():'—';
+  document.getElementById('main-area').innerHTML=`
+    <div class="section-header">
+      <span class="section-title">SYSTEM DIAGNOSTICS</span>
+      <div class="section-line"></div>
+      <div class="section-dot"></div>
+    </div>
+    <div class="sys-section">
+      <div class="sys-title">// DATA SOURCE</div>
+      <div class="sys-row"><span class="sys-key">ENDPOINT</span><span class="sys-val mono">> nybgcr6l45.execute-api</span></div>
+      <div class="sys-row"><span class="sys-key">REGION</span><span class="sys-val mono">> us-east-1</span></div>
+      <div class="sys-row"><span class="sys-key">STAGE</span><span class="sys-val mono">> prod</span></div>
+      <div class="sys-row"><span class="sys-key">RESOURCE</span><span class="sys-val mono">> /bean_products</span></div>
+    </div>
+    <div class="sys-section">
+      <div class="sys-title">// LOCAL CACHE</div>
+      <div class="sys-row"><span class="sys-key">RECORDS</span><span class="sys-val mono">> ${allBeans.length}</span></div>
+      <div class="sys-row"><span class="sys-key">UPDATED</span><span class="sys-val mono">> ${updated}</span></div>
+      <div class="sys-row"><span class="sys-key">STATUS</span><span class="sys-val green">OPERATIONAL</span></div>
+    </div>
+    <div class="sys-section">
+      <div class="sys-title">// ARCHITECTURE</div>
+      <div class="sys-row"><span class="sys-val mono">API GW → Elastic Beanstalk → Node.js</span></div>
+      <div class="sys-row"><span class="sys-val mono">Node.js → Aurora Serverless v2</span></div>
+      <div class="sys-row"><span class="sys-val mono">Browser + IndexedDB cache</span></div>
+    </div>
+    <button class="purge-btn" onclick="purgeCache()">PURGE LOCAL CACHE</button>
+  `;
+}
+
+function purgeCache(){
+  allBeans=[];filtered=[];selId=null;searchTerm='';
+  document.getElementById('sync-status').textContent='CACHE PURGED — RESYNCING...';
+  fetchBeans();
+}
+
+function setView(view, btn){
+  currentView=view;
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  if(!allBeans.length){document.getElementById('main-area').innerHTML='<div class="loading">ACCESSING LCARS DATABASE...</div>';return;}
+  if(view==='inventory')renderInventory();
+  else if(view==='analysis')renderAnalysis();
+  else if(view==='suppliers')renderSuppliers();
+  else if(view==='system')renderSystem();
+}
+
+fetchBeans();
+</script>
+</body>
+</html>
