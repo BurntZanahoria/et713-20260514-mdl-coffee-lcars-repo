@@ -1,70 +1,58 @@
 class SuppliersController < ApplicationController
-  before_action :set_supplier, only: %i[ show edit update destroy ]
 
-  # GET /suppliers or /suppliers.json
+  before_action :set_supplier, only: [:show, :edit, :update, :destroy]
+
   def index
     @suppliers = Supplier.all
   end
 
-  # GET /suppliers/1 or /suppliers/1.json
   def show
   end
 
-  # GET /suppliers/new
   def new
     @supplier = Supplier.new
   end
 
-  # GET /suppliers/1/edit
-  def edit
-  end
-
-  # POST /suppliers or /suppliers.json
   def create
     @supplier = Supplier.new(supplier_params)
 
-    respond_to do |format|
-      if @supplier.save
-        format.html { redirect_to @supplier, notice: "Supplier was successfully created." }
-        format.json { render :show, status: :created, location: @supplier }
-      else
-        format.html { render :new, status: :unprocessable_content }
-        format.json { render json: @supplier.errors, status: :unprocessable_content }
-      end
+    if @supplier.save
+      redirect_to @supplier, notice: "Supplier created successfully."
+    else
+      render :new
     end
   end
 
-  # PATCH/PUT /suppliers/1 or /suppliers/1.json
+  def edit
+  end
+
   def update
-    respond_to do |format|
-      if @supplier.update(supplier_params)
-        format.html { redirect_to @supplier, notice: "Supplier was successfully updated.", status: :see_other }
-        format.json { render :show, status: :ok, location: @supplier }
-      else
-        format.html { render :edit, status: :unprocessable_content }
-        format.json { render json: @supplier.errors, status: :unprocessable_content }
-      end
+    if @supplier.update(supplier_params)
+      redirect_to @supplier, notice: "Supplier updated successfully."
+    else
+      render :edit
     end
   end
 
-  # DELETE /suppliers/1 or /suppliers/1.json
   def destroy
-    @supplier.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to suppliers_path, notice: "Supplier was successfully destroyed.", status: :see_other }
-      format.json { head :no_content }
-    end
+    @supplier.destroy
+    redirect_to suppliers_path, notice: "Supplier deleted successfully."
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_supplier
-      @supplier = Supplier.find(params.expect(:id))
-    end
 
-    # Only allow a list of trusted parameters through.
-    def supplier_params
-      params.expect(supplier: [ :name, :address, :city, :state, :email, :phone ])
-    end
+  def set_supplier
+    @supplier = Supplier.find(params[:id])
+  end
+
+  def supplier_params
+    params.require(:supplier).permit(
+      :name,
+      :email,
+      :phone,
+      :address,
+      :city,
+      :state
+    )
+  end
 end

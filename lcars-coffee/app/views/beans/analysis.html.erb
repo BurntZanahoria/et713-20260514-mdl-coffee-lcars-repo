@@ -1,0 +1,77 @@
+<div class="lcars-card">
+
+  <h2>// STOCK BY VARIETY</h2>
+
+  <% Bean.group(:bean_type).sum(:quantity).each do |type, qty| %>
+
+    <div style="margin-bottom:20px;">
+
+      <strong><%= type %></strong>
+
+      <div style="
+        background:#222;
+        border-radius:20px;
+        overflow:hidden;
+        height:28px;
+        margin-top:8px;
+      ">
+
+        <div style="
+          width:<%= [qty / 40, 100].min %>%;
+          background:
+            <%= ['#f5a623','#b19cff','#81d4fa','#ff9966'].sample %>;
+          height:100%;
+          border-radius:20px;
+        "></div>
+
+      </div>
+
+      <div style="float:right; margin-top:5px;">
+        <%= qty %>
+      </div>
+
+    </div>
+
+  <% end %>
+
+</div>
+
+<br>
+
+<div class="lcars-card">
+
+  <h2>// TOP STOCKED UNITS</h2>
+
+  <% Bean.order(quantity: :desc).limit(5).each do |bean| %>
+
+    <div style="margin-bottom:20px;">
+
+      <strong><%= bean.product_name %></strong>
+
+      <div style="
+        background:#222;
+        border-radius:20px;
+        overflow:hidden;
+        height:28px;
+        margin-top:8px;
+      ">
+
+        <div style="
+          width:<%= [bean.quantity / 15, 100].min %>%;
+          background:
+            <%= ['#f5d27a','#b19cff','#ff9966','#81d4fa'].sample %>;
+          height:100%;
+          border-radius:20px;
+        "></div>
+
+      </div>
+
+      <div style="float:right; margin-top:5px;">
+        <%= bean.quantity %>
+      </div>
+
+    </div>
+
+  <% end %>
+
+</div>

@@ -1,16 +1,42 @@
-<p style="color: green"><%= notice %></p>
+<div class="lcars-grid">
 
-<% content_for :title, "Beans" %>
+<% @beans.each do |bean| %>
 
-<h1>Beans</h1>
+  <div class="lcars-card">
 
-<div id="beans">
-  <% @beans.each do |bean| %>
-    <%= render bean %>
+    <span class="lcars-badge">
+      <%= bean.bean_type %>
+    </span>
+
+    <p>BN-00<%= bean.id %> // SUP-0<%= bean.supplier.id %></p>
+
+    <h2><%= bean.product_name %></h2>
+
+    <p><%= bean.description %></p>
+
+    <br>
+
+    <div class="lcars-stat">
+      cr <%= bean.price %>
+    </div>
+
     <p>
-      <%= link_to "Show this bean", bean %>
+      // <%= bean.supplier.name %>
     </p>
-  <% end %>
+
+    <p>
+      STOCK: <%= bean.quantity %>
+    </p>
+
+    <%= link_to "VIEW", bean %> |
+    <%= link_to "EDIT", edit_bean_path(bean) %>
+
+  </div>
+
+<% end %>
+
 </div>
 
-<%= link_to "New bean", new_bean_path %>
+<br>
+
+<%= link_to "NEW BEAN", new_bean_path, class: "lcars-btn" %>

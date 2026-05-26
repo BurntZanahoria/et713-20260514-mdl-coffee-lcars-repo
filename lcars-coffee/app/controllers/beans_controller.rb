@@ -1,70 +1,64 @@
 class BeansController < ApplicationController
-  before_action :set_bean, only: %i[ show edit update destroy ]
 
-  # GET /beans or /beans.json
+  def analysis
+    @beans = Bean.all
+    @suppliers = Supplier.all
+  end
+
+
+  before_action :set_bean, only: [:show, :edit, :update, :destroy]
+
   def index
     @beans = Bean.all
   end
 
-  # GET /beans/1 or /beans/1.json
   def show
   end
 
-  # GET /beans/new
   def new
     @bean = Bean.new
   end
 
-  # GET /beans/1/edit
-  def edit
-  end
-
-  # POST /beans or /beans.json
   def create
     @bean = Bean.new(bean_params)
 
-    respond_to do |format|
-      if @bean.save
-        format.html { redirect_to @bean, notice: "Bean was successfully created." }
-        format.json { render :show, status: :created, location: @bean }
-      else
-        format.html { render :new, status: :unprocessable_content }
-        format.json { render json: @bean.errors, status: :unprocessable_content }
-      end
+    if @bean.save
+      redirect_to @bean, notice: "Bean created successfully."
+    else
+      render :new
     end
   end
 
-  # PATCH/PUT /beans/1 or /beans/1.json
+  def edit
+  end
+
   def update
-    respond_to do |format|
-      if @bean.update(bean_params)
-        format.html { redirect_to @bean, notice: "Bean was successfully updated.", status: :see_other }
-        format.json { render :show, status: :ok, location: @bean }
-      else
-        format.html { render :edit, status: :unprocessable_content }
-        format.json { render json: @bean.errors, status: :unprocessable_content }
-      end
+    if @bean.update(bean_params)
+      redirect_to @bean, notice: "Bean updated successfully."
+    else
+      render :edit
     end
   end
 
-  # DELETE /beans/1 or /beans/1.json
   def destroy
-    @bean.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to beans_path, notice: "Bean was successfully destroyed.", status: :see_other }
-      format.json { head :no_content }
-    end
+    @bean.destroy
+    redirect_to beans_path, notice: "Bean deleted successfully."
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_bean
-      @bean = Bean.find(params.expect(:id))
-    end
 
-    # Only allow a list of trusted parameters through.
-    def bean_params
-      params.expect(bean: [ :supplier_id, :bean_type, :product_name, :price, :description, :quantity ])
-    end
+  def set_bean
+    @bean = Bean.find(params[:id])
+  end
+
+  def bean_params
+    params.require(:bean).permit(
+      :product_name,
+      :bean_type,
+      :price,
+      :description,
+      :quantity,
+      :supplier_id
+    )
+  end
 end

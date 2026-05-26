@@ -96,3 +96,298 @@ Processing by Rails::WelcomeController#index as HTML
 Completed 200 OK in 9ms (Views: 4.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.7ms)
 
 
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='LcarsCoffee'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='LcarsCoffee'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='LcarsCoffee'*/[0m
+Started GET "/" for 146.111.195.18 at 2026-05-26 21:29:51 +0000
+Cannot render console from 146.111.195.18! Allowed networks: 127.0.0.0/127.255.255.255, ::1, ::ffff:127.0.0.0/::ffff:127.255.255.255
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='LcarsCoffee'*/[0m
+Processing by BeansController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering beans/index.html.erb within layouts/application
+  [1m[36mBean Load (1.1ms)[0m  [1m[34mSELECT "beans".* FROM "beans" /*action='index',application='LcarsCoffee',controller='beans'*/[0m
+  ↳ app/views/beans/index.html.erb:8
+  [1m[36mSupplier Load (0.1ms)[0m  [1m[34mSELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = 1 LIMIT 1 /*action='index',application='LcarsCoffee',controller='beans'*/[0m
+  ↳ app/views/beans/index.html.erb:22
+  [1m[36mSupplier Load (0.2ms)[0m  [1m[34mSELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = 2 LIMIT 1 /*action='index',application='LcarsCoffee',controller='beans'*/[0m
+  ↳ app/views/beans/index.html.erb:22
+  [1m[36mSupplier Load (0.1ms)[0m  [1m[34mSELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = 3 LIMIT 1 /*action='index',application='LcarsCoffee',controller='beans'*/[0m
+  ↳ app/views/beans/index.html.erb:22
+  Rendered beans/index.html.erb within layouts/application (Duration: 35.5ms | GC: 2.7ms)
+  Rendered layout layouts/application.html.erb (Duration: 43.5ms | GC: 3.0ms)
+Completed 200 OK in 121ms (Views: 46.4ms | ActiveRecord: 2.6ms (4 queries, 0 cached) | GC: 26.2ms)
+
+
+Started GET "/favicon.ico" for 146.111.195.18 at 2026-05-26 21:29:52 +0000
+Cannot render console from 146.111.195.18! Allowed networks: 127.0.0.0/127.255.255.255, ::1, ::ffff:127.0.0.0/::ffff:127.255.255.255
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/beans" for 146.111.195.18 at 2026-05-26 21:29:55 +0000
+Cannot render console from 146.111.195.18! Allowed networks: 127.0.0.0/127.255.255.255, ::1, ::ffff:127.0.0.0/::ffff:127.255.255.255
+Processing by BeansController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering beans/index.html.erb within layouts/application
+  [1m[36mBean Load (0.2ms)[0m  [1m[34mSELECT "beans".* FROM "beans" /*action='index',application='LcarsCoffee',controller='beans'*/[0m
+  ↳ app/views/beans/index.html.erb:8
+  [1m[36mSupplier Load (0.1ms)[0m  [1m[34mSELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = 1 LIMIT 1 /*action='index',application='LcarsCoffee',controller='beans'*/[0m
+  ↳ app/views/beans/index.html.erb:22
+  [1m[36mSupplier Load (0.1ms)[0m  [1m[34mSELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = 2 LIMIT 1 /*action='index',application='LcarsCoffee',controller='beans'*/[0m
+  ↳ app/views/beans/index.html.erb:22
+  [1m[36mSupplier Load (0.1ms)[0m  [1m[34mSELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = 3 LIMIT 1 /*action='index',application='LcarsCoffee',controller='beans'*/[0m
+  ↳ app/views/beans/index.html.erb:22
+  Rendered beans/index.html.erb within layouts/application (Duration: 4.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.1ms | GC: 0.2ms)
+Completed 200 OK in 7ms (Views: 6.1ms | ActiveRecord: 0.4ms (4 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/suppliers" for 146.111.195.18 at 2026-05-26 21:29:56 +0000
+Cannot render console from 146.111.195.18! Allowed networks: 127.0.0.0/127.255.255.255, ::1, ::ffff:127.0.0.0/::ffff:127.255.255.255
+Processing by SuppliersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering suppliers/index.html.erb within layouts/application
+  [1m[36mSupplier Load (0.2ms)[0m  [1m[34mSELECT "suppliers".* FROM "suppliers" /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:8
+  Rendered suppliers/index.html.erb within layouts/application (Duration: 2.8ms | GC: 0.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.2ms | GC: 0.4ms)
+Completed 200 OK in 6ms (Views: 4.9ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.4ms)
+
+
+Started GET "/beans" for 146.111.195.18 at 2026-05-26 21:30:28 +0000
+Cannot render console from 146.111.195.18! Allowed networks: 127.0.0.0/127.255.255.255, ::1, ::ffff:127.0.0.0/::ffff:127.255.255.255
+Processing by BeansController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering beans/index.html.erb within layouts/application
+  [1m[36mBean Load (0.2ms)[0m  [1m[34mSELECT "beans".* FROM "beans" /*action='index',application='LcarsCoffee',controller='beans'*/[0m
+  ↳ app/views/beans/index.html.erb:8
+  [1m[36mSupplier Load (0.1ms)[0m  [1m[34mSELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = 1 LIMIT 1 /*action='index',application='LcarsCoffee',controller='beans'*/[0m
+  ↳ app/views/beans/index.html.erb:22
+  [1m[36mSupplier Load (0.1ms)[0m  [1m[34mSELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = 2 LIMIT 1 /*action='index',application='LcarsCoffee',controller='beans'*/[0m
+  ↳ app/views/beans/index.html.erb:22
+  [1m[36mSupplier Load (0.1ms)[0m  [1m[34mSELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = 3 LIMIT 1 /*action='index',application='LcarsCoffee',controller='beans'*/[0m
+  ↳ app/views/beans/index.html.erb:22
+  Rendered beans/index.html.erb within layouts/application (Duration: 4.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.2ms | GC: 0.1ms)
+Completed 200 OK in 7ms (Views: 6.3ms | ActiveRecord: 0.4ms (4 queries, 0 cached) | GC: 0.1ms)
+
+
+Started GET "/suppliers" for 146.111.195.18 at 2026-05-26 21:30:29 +0000
+Cannot render console from 146.111.195.18! Allowed networks: 127.0.0.0/127.255.255.255, ::1, ::ffff:127.0.0.0/::ffff:127.255.255.255
+Processing by SuppliersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering suppliers/index.html.erb within layouts/application
+  [1m[36mSupplier Load (0.2ms)[0m  [1m[34mSELECT "suppliers".* FROM "suppliers" /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:8
+  Rendered suppliers/index.html.erb within layouts/application (Duration: 4.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 9.1ms | GC: 0.0ms)
+Completed 200 OK in 14ms (Views: 9.7ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='LcarsCoffee'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='LcarsCoffee'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='LcarsCoffee'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='LcarsCoffee'*/[0m
+  [1m[36mBean Load (0.3ms)[0m  [1m[34mSELECT "beans".* FROM "beans" /*application='LcarsCoffee'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='LcarsCoffee'*/[0m
+  [1m[36mBean Destroy (1.0ms)[0m  [1m[31mDELETE FROM "beans" WHERE "beans"."id" = 1 /*application='LcarsCoffee'*/[0m
+  [1m[36mTRANSACTION (2.9ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='LcarsCoffee'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='LcarsCoffee'*/[0m
+  [1m[36mBean Destroy (0.8ms)[0m  [1m[31mDELETE FROM "beans" WHERE "beans"."id" = 2 /*application='LcarsCoffee'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='LcarsCoffee'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='LcarsCoffee'*/[0m
+  [1m[36mBean Destroy (0.8ms)[0m  [1m[31mDELETE FROM "beans" WHERE "beans"."id" = 3 /*application='LcarsCoffee'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='LcarsCoffee'*/[0m
+  [1m[36mSupplier Load (0.1ms)[0m  [1m[34mSELECT "suppliers".* FROM "suppliers" /*application='LcarsCoffee'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='LcarsCoffee'*/[0m
+  [1m[36mBean Load (1.5ms)[0m  [1m[34mSELECT "beans".* FROM "beans" WHERE "beans"."supplier_id" = 1 /*application='LcarsCoffee'*/[0m
+  [1m[36mSupplier Destroy (0.1ms)[0m  [1m[31mDELETE FROM "suppliers" WHERE "suppliers"."id" = 1 /*application='LcarsCoffee'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='LcarsCoffee'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='LcarsCoffee'*/[0m
+  [1m[36mBean Load (1.3ms)[0m  [1m[34mSELECT "beans".* FROM "beans" WHERE "beans"."supplier_id" = 2 /*application='LcarsCoffee'*/[0m
+  [1m[36mSupplier Destroy (0.1ms)[0m  [1m[31mDELETE FROM "suppliers" WHERE "suppliers"."id" = 2 /*application='LcarsCoffee'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='LcarsCoffee'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='LcarsCoffee'*/[0m
+  [1m[36mBean Load (1.2ms)[0m  [1m[34mSELECT "beans".* FROM "beans" WHERE "beans"."supplier_id" = 3 /*application='LcarsCoffee'*/[0m
+  [1m[36mSupplier Destroy (0.3ms)[0m  [1m[31mDELETE FROM "suppliers" WHERE "suppliers"."id" = 3 /*application='LcarsCoffee'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='LcarsCoffee'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='LcarsCoffee'*/[0m
+  [1m[36mSupplier Create (1.3ms)[0m  [1m[32mINSERT INTO "suppliers" ("name", "address", "city", "state", "email", "phone", "created_at", "updated_at") VALUES ('Blue Mountain Imports', '123 Coffee St', 'Kingston', 'JM', 'blue@mountain.com', '555-123-4567', '2026-05-26 21:37:43.222368', '2026-05-26 21:37:43.222368') RETURNING "id" /*application='LcarsCoffee'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='LcarsCoffee'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='LcarsCoffee'*/[0m
+  [1m[36mSupplier Create (0.9ms)[0m  [1m[32mINSERT INTO "suppliers" ("name", "address", "city", "state", "email", "phone", "created_at", "updated_at") VALUES ('Colombian Bean Co', '45 Andes Ave', 'Bogotá', 'BO', 'contact@colombianbeans.com', '555-987-6543', '2026-05-26 21:37:43.225940', '2026-05-26 21:37:43.225940') RETURNING "id" /*application='LcarsCoffee'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='LcarsCoffee'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='LcarsCoffee'*/[0m
+  [1m[36mSupplier Create (1.5ms)[0m  [1m[32mINSERT INTO "suppliers" ("name", "address", "city", "state", "email", "phone", "created_at", "updated_at") VALUES ('Ethiopian Roast Traders', '88 Addis Lane', 'Addis Ababa', 'ET', 'ethiopia@roast.com', '555-222-3333', '2026-05-26 21:37:43.229477', '2026-05-26 21:37:43.229477') RETURNING "id" /*application='LcarsCoffee'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='LcarsCoffee'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='LcarsCoffee'*/[0m
+  [1m[36mSupplier Load (1.0ms)[0m  [1m[34mSELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = 4 LIMIT 1 /*application='LcarsCoffee'*/[0m
+  [1m[36mBean Create (0.1ms)[0m  [1m[32mINSERT INTO "beans" ("supplier_id", "bean_type", "product_name", "price", "description", "quantity", "created_at", "updated_at") VALUES (4, 'Arabica', 'Blue Mountain Classic', 19.99, 'Smooth, mild Jamaican coffee with chocolate notes.', 100, '2026-05-26 21:37:43.236858', '2026-05-26 21:37:43.236858') RETURNING "id" /*application='LcarsCoffee'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='LcarsCoffee'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='LcarsCoffee'*/[0m
+  [1m[36mSupplier Load (1.0ms)[0m  [1m[34mSELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = 5 LIMIT 1 /*application='LcarsCoffee'*/[0m
+  [1m[36mBean Create (0.1ms)[0m  [1m[32mINSERT INTO "beans" ("supplier_id", "bean_type", "product_name", "price", "description", "quantity", "created_at", "updated_at") VALUES (5, 'Robusta', 'Andes Dark Roast', 14.5, 'Bold Colombian roast with strong body.', 200, '2026-05-26 21:37:43.241378', '2026-05-26 21:37:43.241378') RETURNING "id" /*application='LcarsCoffee'*/[0m
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='LcarsCoffee'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='LcarsCoffee'*/[0m
+  [1m[36mSupplier Load (1.9ms)[0m  [1m[34mSELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = 6 LIMIT 1 /*application='LcarsCoffee'*/[0m
+  [1m[36mBean Create (0.1ms)[0m  [1m[32mINSERT INTO "beans" ("supplier_id", "bean_type", "product_name", "price", "description", "quantity", "created_at", "updated_at") VALUES (6, 'Arabica', 'Ethiopian Sunrise', 16.75, 'Floral and fruity light roast.', 150, '2026-05-26 21:37:43.250568', '2026-05-26 21:37:43.250568') RETURNING "id" /*application='LcarsCoffee'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='LcarsCoffee'*/[0m
+Started GET "/" for 146.111.195.18 at 2026-05-26 21:37:49 +0000
+Cannot render console from 146.111.195.18! Allowed networks: 127.0.0.0/127.255.255.255, ::1, ::ffff:127.0.0.0/::ffff:127.255.255.255
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='LcarsCoffee'*/[0m
+Processing by BeansController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering beans/index.html.erb within layouts/application
+  [1m[36mBean Load (1.2ms)[0m  [1m[34mSELECT "beans".* FROM "beans" /*action='index',application='LcarsCoffee',controller='beans'*/[0m
+  ↳ app/views/beans/index.html.erb:4
+  [1m[36mSupplier Load (0.1ms)[0m  [1m[34mSELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = 4 LIMIT 1 /*action='index',application='LcarsCoffee',controller='beans'*/[0m
+  ↳ app/views/beans/index.html.erb:12
+  [1m[36mSupplier Load (0.1ms)[0m  [1m[34mSELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = 5 LIMIT 1 /*action='index',application='LcarsCoffee',controller='beans'*/[0m
+  ↳ app/views/beans/index.html.erb:12
+  [1m[36mSupplier Load (0.1ms)[0m  [1m[34mSELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = 6 LIMIT 1 /*action='index',application='LcarsCoffee',controller='beans'*/[0m
+  ↳ app/views/beans/index.html.erb:12
+  Rendered beans/index.html.erb within layouts/application (Duration: 26.4ms | GC: 1.6ms)
+  Rendered layout layouts/application.html.erb (Duration: 37.1ms | GC: 3.0ms)
+Completed 200 OK in 108ms (Views: 36.7ms | ActiveRecord: 2.8ms (4 queries, 0 cached) | GC: 51.5ms)
+
+
+Started GET "/suppliers" for 146.111.195.18 at 2026-05-26 21:37:52 +0000
+Cannot render console from 146.111.195.18! Allowed networks: 127.0.0.0/127.255.255.255, ::1, ::ffff:127.0.0.0/::ffff:127.255.255.255
+Processing by SuppliersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering suppliers/index.html.erb within layouts/application
+  [1m[36mSupplier Load (0.2ms)[0m  [1m[34mSELECT "suppliers".* FROM "suppliers" /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:4
+  [1m[36mBean Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "beans" WHERE "beans"."supplier_id" = 4 /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:9
+  [1m[36mBean Sum (0.1ms)[0m  [1m[34mSELECT SUM("beans"."quantity") FROM "beans" WHERE "beans"."supplier_id" = 4 /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:22
+  [1m[36mBean Sum (0.1ms)[0m  [1m[34mSELECT SUM(price * quantity) FROM "beans" WHERE "beans"."supplier_id" = 4 /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:26
+  [1m[36mBean Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "beans" WHERE "beans"."supplier_id" = 5 /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:9
+  [1m[36mBean Sum (0.1ms)[0m  [1m[34mSELECT SUM("beans"."quantity") FROM "beans" WHERE "beans"."supplier_id" = 5 /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:22
+  [1m[36mBean Sum (0.1ms)[0m  [1m[34mSELECT SUM(price * quantity) FROM "beans" WHERE "beans"."supplier_id" = 5 /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:26
+  [1m[36mBean Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "beans" WHERE "beans"."supplier_id" = 6 /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:9
+  [1m[36mBean Sum (0.1ms)[0m  [1m[34mSELECT SUM("beans"."quantity") FROM "beans" WHERE "beans"."supplier_id" = 6 /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:22
+  [1m[36mBean Sum (0.1ms)[0m  [1m[34mSELECT SUM(price * quantity) FROM "beans" WHERE "beans"."supplier_id" = 6 /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:26
+  Rendered suppliers/index.html.erb within layouts/application (Duration: 20.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 22.5ms | GC: 0.0ms)
+Completed 200 OK in 24ms (Views: 22.3ms | ActiveRecord: 1.0ms (10 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 146.111.195.18 at 2026-05-26 21:37:53 +0000
+Cannot render console from 146.111.195.18! Allowed networks: 127.0.0.0/127.255.255.255, ::1, ::ffff:127.0.0.0/::ffff:127.255.255.255
+Processing by BeansController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering beans/index.html.erb within layouts/application
+  [1m[36mBean Load (0.2ms)[0m  [1m[34mSELECT "beans".* FROM "beans" /*action='index',application='LcarsCoffee',controller='beans'*/[0m
+  ↳ app/views/beans/index.html.erb:4
+  [1m[36mSupplier Load (0.1ms)[0m  [1m[34mSELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = 4 LIMIT 1 /*action='index',application='LcarsCoffee',controller='beans'*/[0m
+  ↳ app/views/beans/index.html.erb:12
+  [1m[36mSupplier Load (0.1ms)[0m  [1m[34mSELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = 5 LIMIT 1 /*action='index',application='LcarsCoffee',controller='beans'*/[0m
+  ↳ app/views/beans/index.html.erb:12
+  [1m[36mSupplier Load (0.1ms)[0m  [1m[34mSELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = 6 LIMIT 1 /*action='index',application='LcarsCoffee',controller='beans'*/[0m
+  ↳ app/views/beans/index.html.erb:12
+  Rendered beans/index.html.erb within layouts/application (Duration: 5.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.5ms | GC: 0.0ms)
+Completed 200 OK in 8ms (Views: 6.5ms | ActiveRecord: 0.4ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/suppliers" for 146.111.195.18 at 2026-05-26 21:37:56 +0000
+Cannot render console from 146.111.195.18! Allowed networks: 127.0.0.0/127.255.255.255, ::1, ::ffff:127.0.0.0/::ffff:127.255.255.255
+Processing by SuppliersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering suppliers/index.html.erb within layouts/application
+  [1m[36mSupplier Load (0.2ms)[0m  [1m[34mSELECT "suppliers".* FROM "suppliers" /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:4
+  [1m[36mBean Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "beans" WHERE "beans"."supplier_id" = 4 /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:9
+  [1m[36mBean Sum (0.1ms)[0m  [1m[34mSELECT SUM("beans"."quantity") FROM "beans" WHERE "beans"."supplier_id" = 4 /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:22
+  [1m[36mBean Sum (0.1ms)[0m  [1m[34mSELECT SUM(price * quantity) FROM "beans" WHERE "beans"."supplier_id" = 4 /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:26
+  [1m[36mBean Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "beans" WHERE "beans"."supplier_id" = 5 /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:9
+  [1m[36mBean Sum (0.1ms)[0m  [1m[34mSELECT SUM("beans"."quantity") FROM "beans" WHERE "beans"."supplier_id" = 5 /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:22
+  [1m[36mBean Sum (0.1ms)[0m  [1m[34mSELECT SUM(price * quantity) FROM "beans" WHERE "beans"."supplier_id" = 5 /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:26
+  [1m[36mBean Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "beans" WHERE "beans"."supplier_id" = 6 /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:9
+  [1m[36mBean Sum (0.1ms)[0m  [1m[34mSELECT SUM("beans"."quantity") FROM "beans" WHERE "beans"."supplier_id" = 6 /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:22
+  [1m[36mBean Sum (0.1ms)[0m  [1m[34mSELECT SUM(price * quantity) FROM "beans" WHERE "beans"."supplier_id" = 6 /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:26
+  Rendered suppliers/index.html.erb within layouts/application (Duration: 13.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 14.5ms | GC: 0.0ms)
+Completed 200 OK in 16ms (Views: 14.1ms | ActiveRecord: 0.9ms (10 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 146.111.195.18 at 2026-05-26 21:39:55 +0000
+Cannot render console from 146.111.195.18! Allowed networks: 127.0.0.0/127.255.255.255, ::1, ::ffff:127.0.0.0/::ffff:127.255.255.255
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='LcarsCoffee'*/[0m
+Processing by BeansController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering beans/index.html.erb within layouts/application
+  [1m[36mBean Load (1.3ms)[0m  [1m[34mSELECT "beans".* FROM "beans" /*action='index',application='LcarsCoffee',controller='beans'*/[0m
+  ↳ app/views/beans/index.html.erb:4
+  [1m[36mSupplier Load (0.1ms)[0m  [1m[34mSELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = 4 LIMIT 1 /*action='index',application='LcarsCoffee',controller='beans'*/[0m
+  ↳ app/views/beans/index.html.erb:12
+  [1m[36mSupplier Load (0.1ms)[0m  [1m[34mSELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = 5 LIMIT 1 /*action='index',application='LcarsCoffee',controller='beans'*/[0m
+  ↳ app/views/beans/index.html.erb:12
+  [1m[36mSupplier Load (0.1ms)[0m  [1m[34mSELECT "suppliers".* FROM "suppliers" WHERE "suppliers"."id" = 6 LIMIT 1 /*action='index',application='LcarsCoffee',controller='beans'*/[0m
+  ↳ app/views/beans/index.html.erb:12
+  Rendered beans/index.html.erb within layouts/application (Duration: 44.5ms | GC: 2.1ms)
+  Rendered layout layouts/application.html.erb (Duration: 60.1ms | GC: 3.5ms)
+Completed 200 OK in 132ms (Views: 60.6ms | ActiveRecord: 3.2ms (4 queries, 0 cached) | GC: 49.2ms)
+
+
+Started GET "/analysis" for 146.111.195.18 at 2026-05-26 21:39:59 +0000
+Cannot render console from 146.111.195.18! Allowed networks: 127.0.0.0/127.255.255.255, ::1, ::ffff:127.0.0.0/::ffff:127.255.255.255
+Processing by BeansController#analysis as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering beans/analysis.html.erb within layouts/application
+  [1m[36mBean Sum (0.2ms)[0m  [1m[34mSELECT SUM("beans"."quantity") AS "sum_quantity", "beans"."bean_type" AS "beans_bean_type" FROM "beans" GROUP BY "beans"."bean_type" /*action='analysis',application='LcarsCoffee',controller='beans'*/[0m
+  ↳ app/views/beans/analysis.html.erb:6
+  [1m[36mBean Load (0.4ms)[0m  [1m[34mSELECT "beans".* FROM "beans" ORDER BY "beans"."quantity" DESC LIMIT 5 /*action='analysis',application='LcarsCoffee',controller='beans'*/[0m
+  ↳ app/views/beans/analysis.html.erb:46
+  Rendered beans/analysis.html.erb within layouts/application (Duration: 4.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.4ms | GC: 0.0ms)
+Completed 200 OK in 7ms (Views: 5.4ms | ActiveRecord: 0.6ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/suppliers" for 146.111.195.18 at 2026-05-26 21:40:03 +0000
+Cannot render console from 146.111.195.18! Allowed networks: 127.0.0.0/127.255.255.255, ::1, ::ffff:127.0.0.0/::ffff:127.255.255.255
+Processing by SuppliersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering suppliers/index.html.erb within layouts/application
+  [1m[36mSupplier Load (0.2ms)[0m  [1m[34mSELECT "suppliers".* FROM "suppliers" /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:4
+  [1m[36mBean Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "beans" WHERE "beans"."supplier_id" = 4 /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:9
+  [1m[36mBean Sum (0.1ms)[0m  [1m[34mSELECT SUM("beans"."quantity") FROM "beans" WHERE "beans"."supplier_id" = 4 /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:22
+  [1m[36mBean Sum (0.1ms)[0m  [1m[34mSELECT SUM(price * quantity) FROM "beans" WHERE "beans"."supplier_id" = 4 /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:26
+  [1m[36mBean Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "beans" WHERE "beans"."supplier_id" = 5 /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:9
+  [1m[36mBean Sum (0.1ms)[0m  [1m[34mSELECT SUM("beans"."quantity") FROM "beans" WHERE "beans"."supplier_id" = 5 /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:22
+  [1m[36mBean Sum (0.1ms)[0m  [1m[34mSELECT SUM(price * quantity) FROM "beans" WHERE "beans"."supplier_id" = 5 /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:26
+  [1m[36mBean Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "beans" WHERE "beans"."supplier_id" = 6 /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:9
+  [1m[36mBean Sum (0.1ms)[0m  [1m[34mSELECT SUM("beans"."quantity") FROM "beans" WHERE "beans"."supplier_id" = 6 /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:22
+  [1m[36mBean Sum (0.1ms)[0m  [1m[34mSELECT SUM(price * quantity) FROM "beans" WHERE "beans"."supplier_id" = 6 /*action='index',application='LcarsCoffee',controller='suppliers'*/[0m
+  ↳ app/views/suppliers/index.html.erb:26
+  Rendered suppliers/index.html.erb within layouts/application (Duration: 17.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 19.0ms | GC: 0.0ms)
+Completed 200 OK in 21ms (Views: 19.0ms | ActiveRecord: 0.9ms (10 queries, 0 cached) | GC: 0.0ms)
+
+

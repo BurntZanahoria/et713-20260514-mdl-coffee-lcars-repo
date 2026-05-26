@@ -1,16 +1,39 @@
-<p style="color: green"><%= notice %></p>
+<div class="lcars-grid">
 
-<% content_for :title, "Suppliers" %>
+<% @suppliers.each do |supplier| %>
 
-<h1>Suppliers</h1>
+  <div class="lcars-card">
 
-<div id="suppliers">
-  <% @suppliers.each do |supplier| %>
-    <%= render supplier %>
+    <span class="lcars-badge">
+      <%= supplier.beans.count %> SKU
+    </span>
+
     <p>
-      <%= link_to "Show this supplier", supplier %>
+      SUP-0<%= supplier.id %> //
+      <%= supplier.city %>, <%= supplier.state %>
     </p>
-  <% end %>
+
+    <h2><%= supplier.name %></h2>
+
+    <br>
+
+    <div class="lcars-stat">
+      stk <%= supplier.beans.sum(:quantity) %>
+    </div>
+
+    <p>
+      cr <%= supplier.beans.sum("price * quantity") %> value
+    </p>
+
+    <%= link_to "VIEW", supplier %> |
+    <%= link_to "EDIT", edit_supplier_path(supplier) %>
+
+  </div>
+
+<% end %>
+
 </div>
 
-<%= link_to "New supplier", new_supplier_path %>
+<br>
+
+<%= link_to "NEW SUPPLIER", new_supplier_path, class: "lcars-btn purple" %>

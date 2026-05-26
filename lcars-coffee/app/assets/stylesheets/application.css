@@ -1,10 +1,133 @@
-/*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
- */
+body {
+  background: #000;
+  color: #f6c177;
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+
+.lcars-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.lcars-sidebar {
+  width: 180px;
+  background: #000;
+  padding: 20px 10px;
+}
+
+.lcars-btn {
+  display: block;
+  background: #f4c27a;
+  color: #111;
+  padding: 18px;
+  margin-bottom: 14px;
+  border-radius: 40px;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  font-size: 18px;
+}
+
+.lcars-btn.blue {
+  background: #81a1ff;
+}
+
+.lcars-btn.purple {
+  background: #b19cff;
+}
+
+.lcars-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.lcars-topbar {
+  background: #f5a623;
+  color: #111;
+  padding: 25px;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  margin-bottom: 20px;
+}
+
+.lcars-title {
+  font-size: 40px;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+.lcars-subtitle {
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+.lcars-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.lcars-card {
+  background: #111;
+  border-left: 8px solid #f5a623;
+  padding: 20px;
+  color: #f6c177;
+  box-shadow: 0 0 12px rgba(255,140,0,0.3);
+}
+
+.lcars-card h2,
+.lcars-card h3 {
+  margin-top: 0;
+  color: #fff2cc;
+}
+
+.lcars-badge {
+  float: right;
+  background: #b19cff;
+  color: #111;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.lcars-stat {
+  color: #81a1ff;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+a {
+  color: #81a1ff;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td, th {
+  border-bottom: 1px solid #333;
+  padding: 10px;
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  background: #111;
+  border: 2px solid #f5a623;
+  color: white;
+}
+
+button,
+input[type=submit] {
+  background: #f5a623;
+  color: black;
+  border: none;
+  padding: 12px 20px;
+  font-weight: bold;
+  border-radius: 20px;
+  cursor: pointer;
+}
